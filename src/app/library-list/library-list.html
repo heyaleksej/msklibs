@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="header">
+        <img [src]="imageUrl" alt="Library Image" class="header-image" loading="lazy" />
+        <div class="search-container">
+            <input
+                    type="text"
+                    [(ngModel)]="searchTerm"
+                    placeholder="Введите название библиотеки"
+                    (keyup.enter)="search()"
+                    class="search-input"
+            />
+            <button (click)="search()" class="search-button">Найти библиотеки</button>
+        </div>
+    </div>
+
+    <div *ngIf="filteredLibraries.length > 0" class="results">
+        <table>
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Адрес</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    *ngFor="let lib of filteredLibraries"
+                    (click)="selectLibrary(lib)"
+                    [class.selected]="selectedLibrary?.Number === lib.Number"
+            >
+                <td>{{ lib.Number }}</td>
+                <td [appHighlight]="lib.CommonName || lib.FullName || ''" [highlightText]="searchTerm"></td>
+                <td>{{ lib.OrgInfo?.[0]?.LegalAddress || lib.Address }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button (click)="loadMore()"
+                *ngIf="filteredLibraries.length > 49"
+                class="load-more-button">Загрузить ещё</button>
+    </div>
+
+    <div *ngIf="filteredLibraries.length === 0 && searchTerm && !loading" class="no-results">
+        Библиотеки не найдены
+    </div>
+    <app-library-info
+            *ngIf="selectedLibrary"
+            [library]="selectedLibrary"
+            class="modal-window"
+            (close)="closeLibraryInfo()"
+            (click)="$event.stopPropagation()"
+    ></app-library-info>
+    <div
+            class="modal-overlay"
+            *ngIf="selectedLibrary"
+            (click)="closeLibraryInfo()"
+    ></div>
+</div>

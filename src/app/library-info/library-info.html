@@ -1,0 +1,14 @@
+<div *ngIf="library" class="library-card">
+    <div class="header">
+        <h2>Детальная информация</h2>
+        <img src="assets/close.svg" (click)="close.emit()" class="close-icon"/>
+    </div>
+    <div class="field">
+        <span class="field-name">Название:</span>
+        <span class="field-value">{{ library.FullName }}</span>
+    </div>
+    <div class="field">
+        <span class="field-name">Адрес:</span>
+        <span class="field-value">{{ library.OrgInfo[0].LegalAddress }}</span>
+    </div>
+</div>

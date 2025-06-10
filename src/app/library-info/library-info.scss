@@ -1,0 +1,37 @@
+.library-card {
+  padding: 0 20px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+
+  .header {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .close-icon{
+      width: 24px;
+      height: 24px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .field {
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .field-name {
+    font-weight: bold;
+    min-width: 150px;
+  }
+
+  .field-value {
+    flex: 1;
+  }
+}
+
